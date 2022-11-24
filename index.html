@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prozapp</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+        integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="banner"></div>
+    <div class="container h-100 py-4">
+        <div class="d-flex h-100 justify-content-center">
+            <div class="user-side d-flex flex-column">
+                <!-- Mio Avatar -->
+                <div class="my-nav d-flex">
+                    <div class="avatar-container me-auto d-flex align-items-center">
+                        <img src="img/avatar_io.jpg" alt="my-avatar" class="img-fluid rounded-circle">
+                        <span class="ms-2">Sofia</span>
+                    </div>
+
+                    <div class="icon-container"><i class="fa-solid fa-circle-notch"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-message"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+
+                </div>
+
+                <!-- Banner Notifiche -->
+
+                <div class="banner-notification-nav d-flex">
+                    <div class="avatar-container d-flex align-items-center">
+                        <div class="notification d-flex align-items-center"><i class="fa-solid fa-bell-slash"></i></div>
+                    </div>
+                    <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
+                        <small class="fw-bold">Ricevi notifiche di nuovi messaggi</small>
+                        <a>Attiva notifiche desktop</a>
+                    </div>
+                </div>
+                <!-- Barra di ricerca chat -->
+
+                <div class="search-bar-container p-2">
+                    <div class="input-group">
+                        <button class="btn-group btn rounded-0">
+                            <i class="fa-solid fa-magnifying-glass px-3"></i>
+                        </button>
+                        <input type="text" class="form-control form-control-sm rounded-0 shadow-none"
+                            placeholder="Cerca o inizia una nuova chat">
+                    </div>
+                </div>
+
+                <!-- Lista chat recenti -->
+                <div class="chats-container">
+                    <div class="single-recent-chat-container d-flex align-items-center">
+                        <div class="avatar-container">
+                            <img src="img/avatar_1.jpg" alt="avatar1" class="img-fluid rounded-circle">
+                        </div>
+                        <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
+                            <span>Michele</span>
+                            <small class="last-message">ultimo messaggio inviato</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Selezionata -->
+            <div class="chat-side d-flex flex-column">
+                <!-- Navbar chat selezionata -->
+                <div class="my-nav d-flex border-start border-2 border-light">
+                    <div class="avatar-container d-flex align-items-center">
+                        <img src="img/avatar_1.jpg" alt="my-avatar" class="img-fluid rounded-circle">
+                    </div>
+                    <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
+                        <span>Michele</span>
+                        <small class="last-message">ultimo accesso alle ore 12:00</small>
+                    </div>
+
+                    <div class="icon-container"><i class="fa-solid fa-magnifying-glass"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-paperclip"></i></div>
+                    <div class="icon-container"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+
+                </div>
+                <!-- messaggi chat selezionata-->
+                <div class="messages-chat flex-grow-1 p-2">
+                    <div class="message-container my-message-container">
+                        <div class="my-message">
+                            Ciao
+                        </div>
+                    </div>
+                    <div class="message-container your-message-container gap-1">
+                        <div class="your-message ">
+                            ciao
+                        </div>
+                    </div>
+                </div>
+                <div class="text-bar-container">
+                    <div class="emote"><i class="fa-regular fa-face-smile"></i></div>
+                    <div class="text-bar flex-grow-1">
+                        <input type="text" class="form-control shadow-none rounded-1"
+                            placeholder="Scrivi un messaggio ">
+                    </div>
+                    <div class="emote"><i class="fa-solid fa-microphone"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
