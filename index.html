@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <div class="banner"></div>
+
     <div class="container h-100 py-4" id="app">
         <div class="d-flex h-100 justify-content-center">
             <div class="user-side d-flex flex-column">
@@ -58,10 +58,11 @@
 
                 <!-- Lista chat recenti -->
                 <div class="chats-container">
-                    <div class="single-recent-chat-container d-flex align-items-center"
-                        v-for="item,i in recentChatsList">
+                    <div :class="savedIndex === i ? 'active' :''"
+                        class="single-recent-chat-container d-flex align-items-center" v-for="item,i in recentChatsList"
+                        @click="saveIndex(i)">
                         <div class="avatar-container">
-                            <img :src="'img/'+'avatar'+item.avatar+'.jpg'" :alt="item.name"
+                            <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="item.name"
                                 class="img-fluid rounded-circle">
                         </div>
                         <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
@@ -77,11 +78,13 @@
                 <!-- Navbar chat selezionata -->
                 <div class="my-nav d-flex border-start border-2 border-light">
                     <div class="avatar-container d-flex align-items-center">
-                        <img src="img/avatar_1.jpg" alt="my-avatar" class="img-fluid rounded-circle">
+                        <img :src="'img/avatar'+ recentChatsList[savedIndex].avatar +'.jpg'" alt="my-avatar"
+                            class="img-fluid rounded-circle">
                     </div>
                     <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
-                        <span>Michele</span>
-                        <small class="last-message">ultimo accesso alle ore 12:00</small>
+                        <span>{{ recentChatsList[savedIndex].name }}</span>
+                        <small class="last-message">ultimo accesso alle ore 12:00
+                        </small>
                     </div>
 
                     <div class="icon-container"><i class="fa-solid fa-magnifying-glass"></i></div>
@@ -90,15 +93,11 @@
 
                 </div>
                 <!-- messaggi chat selezionata-->
-                <div class="messages-chat flex-grow-1 p-2">
-                    <div class="message-container my-message-container">
-                        <div class="my-message">
-                            Ciao
-                        </div>
-                    </div>
-                    <div class="message-container your-message-container gap-1">
-                        <div class="your-message ">
-                            ciao
+                <div class="messages-chat flex-grow-1 overflow-auto p-2">
+                    <div class="message-container my-message-container gap-2">
+                        <div v-for="item in recentChatsList[savedIndex].messages"
+                            :class="item.status === 'sent' ? 'my-message':'your-message'">
+                            {{item.message}}
                         </div>
                     </div>
                 </div>

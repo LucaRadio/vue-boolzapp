@@ -1,17 +1,8 @@
 body {
     height: 100vh;
     width: 100vw;
-    background-color: #dadbd4;
-}
-
-.banner {
-    background-color: #009688;
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    height: 15vh;
-    z-index: -1;
+    background: rgb(0, 150, 136);
+    background: linear-gradient(180deg, rgba(0, 150, 136, 1) 20%, rgba(218, 219, 212, 1) 20%, rgba(216, 219, 213, 1) 45%, rgba(214, 219, 215, 1) 75%, rgba(210, 219, 220, 1) 100%);
 }
 
 .user-side {
@@ -80,6 +71,12 @@ body {
     border-top: 1px solid #eaeaea;
 }
 
+.single-recent-chat-container:hover,
+.active {
+    background-color: #eaeaea;
+}
+
+
 
 .last-message {
     color: #c6c5cb;
@@ -109,23 +106,18 @@ body {
     flex-direction: column;
 }
 
-.my-message-container {
-    align-items: end;
-}
-
-.your-message-container {
-    align-items: start;
-}
-
 .my-message {
     background-color: #d9fdd3;
     padding: .5rem .75rem;
     border-radius: 10px;
+    max-width: 70%;
+    align-self: end;
 }
 
 .your-message {
     background-color: white;
     padding: .5rem .75rem;
     border-radius: 10px;
-    max-width: 80%;
+    max-width: 70%;
+    align-self: start;
 }

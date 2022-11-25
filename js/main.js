@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      savedIndex: 0,
       recentChatsList: [{
         name: 'Michele',
         avatar: '_1',
@@ -107,6 +108,12 @@ createApp({
         messages: [],
       }
       ],
+    }
+  },
+  methods: {
+    saveIndex(i) {
+      this.savedIndex = i;
+
     }
   }
 }).mount("#app")
