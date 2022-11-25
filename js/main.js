@@ -28,7 +28,6 @@ createApp({
           status: 'received'
         }
         ],
-        lastAccess: '12:00',
       },
       {
         name: 'Fabio',
@@ -50,7 +49,6 @@ createApp({
           status: 'received'
         }
         ],
-        lastAccess: '12:00',
       },
       {
         name: 'Samuele',
@@ -72,7 +70,6 @@ createApp({
           status: 'received'
         }
         ],
-        lastAccess: '12:00',
       },
       {
         name: 'Alessandro B.',
@@ -89,14 +86,12 @@ createApp({
           status: 'received'
         }
         ],
-        lastAccess: '12:00',
       },
       {
         name: 'Alessandro L.',
         avatar: '_5',
         visible: true,
         messages: [],
-        lastAccess: '12:00',
       },
       {
         name: 'Claudia',
@@ -109,14 +104,12 @@ createApp({
         name: 'Federico',
         avatar: '_7',
         visible: true,
-        lastAccess: '12:00',
         messages: [],
       },
       {
         name: 'Davide',
         avatar: '_8',
         visible: true,
-        lastAccess: '12:00',
         messages: [],
       }
       ],
@@ -145,7 +138,6 @@ createApp({
     },
     answer() {
       this.createMessage(false)
-      this.recentChatsList[this.savedIndex].lastAccess = this.newMessage.date;
 
     },
     createMessage(sent) {
