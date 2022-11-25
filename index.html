@@ -67,7 +67,9 @@
                         </div>
                         <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
                             <span>{{item.name}}</span>
-                            <small class="last-message">Ultimo Messaggio inviato</small>
+                            <small v-if="item.messages[item.messages.length - 1]"
+                                class="last-message">{{item.messages[item.messages.length - 1].message}}
+                            </small>
                         </div>
                     </div>
                 </div>
@@ -84,7 +86,7 @@
                     <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
                         <span>{{ recentChatsList[savedIndex].name }}</span>
                         <small class="last-message">ultimo accesso alle ore
-                            {{recentChatsList[savedIndex].messages[lastMessageIndex].date}}
+                            {{recentChatsList[savedIndex].lastAccess}}
                         </small>
                     </div>
 
@@ -96,11 +98,11 @@
                 <!-- messaggi chat selezionata-->
                 <div class="messages-chat flex-grow-1 overflow-auto p-2">
                     <div class="message-container my-message-container gap-2">
-                        <div class="fs-6" v-for="item in recentChatsList[savedIndex].messages"
+                        <div class="fs-6" v-for="item,i in recentChatsList[savedIndex].messages"
                             :class="item.status === 'sent' ? 'my-message':'your-message'">
                             {{item.message}}
                             <small class="date d-block text-end">
-                                {{(item.date).slice("")}}
+                                {{item.date}}
                             </small>
                         </div>
 

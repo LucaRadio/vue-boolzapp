@@ -3,8 +3,11 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      lastMessageIndex: 0,
+      lastMessage: '',
       savedIndex: 0,
+      newMessageChat: '',
+      newMessage: {},
+
       recentChatsList: [{
         name: 'Michele',
         avatar: '_1',
@@ -12,7 +15,7 @@ createApp({
         messages: [{
           date: '10/01/2020 15:30:55',
           message: 'Hai portato a spasso il cane?',
-          status: 'sent'
+          status: 'sent',
         },
         {
           date: '10/01/2020 15:50:00',
@@ -25,6 +28,7 @@ createApp({
           status: 'received'
         }
         ],
+        lastAccess: '12:00',
       },
       {
         name: 'Fabio',
@@ -46,6 +50,7 @@ createApp({
           status: 'received'
         }
         ],
+        lastAccess: '12:00',
       },
       {
         name: 'Samuele',
@@ -67,6 +72,7 @@ createApp({
           status: 'received'
         }
         ],
+        lastAccess: '12:00',
       },
       {
         name: 'Alessandro B.',
@@ -83,61 +89,84 @@ createApp({
           status: 'received'
         }
         ],
+        lastAccess: '12:00',
       },
       {
         name: 'Alessandro L.',
         avatar: '_5',
         visible: true,
         messages: [],
+        lastAccess: '12:00',
       },
       {
         name: 'Claudia',
         avatar: '_6',
         visible: true,
         messages: [],
+        lastAccess: '12"00',
       },
       {
         name: 'Federico',
         avatar: '_7',
         visible: true,
+        lastAccess: '12:00',
         messages: [],
       },
       {
         name: 'Davide',
         avatar: '_8',
         visible: true,
+        lastAccess: '12:00',
         messages: [],
       }
       ],
-      newMessageChat: '',
-      newMessage: {
-        date: '',
-        message: '',
-        status: ''
-      }
+
     }
   },
   methods: {
     saveIndex(i) {
       this.savedIndex = i;
 
+
     },
     addMessage() {
-      let date = new Date;
-      let hours = date.getHours();
-      let minutes = date.getMinutes();
-      let newDate = `${hours}:${minutes}`
+      let clock = new Date;
+      let hours = clock.getHours();
+      let minutes = (clock.getMinutes()).toString();
+      if (minutes.length === 2) {
+        newClock = `${hours}:${minutes}`
+      } else {
+        minutes = "0" + minutes;
+        newClock = `${hours}:${minutes}`
+      }
+      this.createMessage(true);
+      this.newMessageChat = '';
+      setTimeout(this.answer, 1000)
 
-      this.newMessage.date = newDate,
-        this.newMessage.message = this.newMessageChat,
-        this.newMessage.status = 'sent'
-      console.log(this.recentChatsList[this.savedIndex]);
-      this.recentChatsList[this.savedIndex].messages.push(
-        this.newMessage
-      )
-      // this.lastMessageIndex = this.recentChatsList[this.savedIndex].messages.length - 1;
+
     },
+    answer() {
+      this.createMessage(false)
 
+    },
+    createMessage(sent) {
+      this.newMessage.date = newClock;
+      if (sent === true) {
+        this.newMessage.message = this.newMessageChat;
+        this.newMessage.status = 'sent';
+      } else {
+        this.newMessage.message = 'ok';
+        this.newMessage.status = 'received';
+
+      }
+      this.recentChatsList[this.savedIndex].lastAccess = this.newMessage.date;
+      this.recentChatsList[this.savedIndex].messages.push({
+        date: this.newMessage.date,
+        message: this.newMessage.message,
+        status: this.newMessage.status
+      })
+
+    }
 
   },
   mounted() {
