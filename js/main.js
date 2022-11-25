@@ -120,9 +120,6 @@ createApp({
 
       const message = conversation.messages[conversation.messages.length - 1];
 
-      // console.log(message.date.split(""));
-      // console.log(message.date.slice(10, -3));
-
       return {
         message: message.message,
         date: message.date
