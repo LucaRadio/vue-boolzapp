@@ -3,7 +3,6 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      lastMessage: 'recentChatsList[savedIndex].messages[recentChatsList[savedIndex].messages.length -1]',
       savedIndex: 0,
       newMessageChat: '',
       newMessage: {},
@@ -116,6 +115,19 @@ createApp({
     }
   },
   methods: {
+    getLastMessageByIndex(conversationIndex) {
+      const conversation = this.recentChatsList[conversationIndex];
+
+      const message = conversation.messages[conversation.messages.length - 1];
+
+      // console.log(message.date.split(""));
+      // console.log(message.date.slice(10, -3));
+
+      return {
+        message: message.message,
+        date: message.date
+      };
+    },
     saveIndex(i) {
       this.savedIndex = i;
     },
@@ -154,12 +166,20 @@ createApp({
         message: this.newMessage.message,
         status: this.newMessage.status
       })
-
-
-    }
-
+    },
   },
   mounted() {
+    for (item in this.recentChatsList) {
+      for (let i = 0; i < this.recentChatsList[item].messages.length; i++) {
+        let dateConverted = this.recentChatsList[item].messages[i].date;
+        dateConverted = dateConverted.split("");
+        dateConverted = dateConverted.slice(10, -3);
+        dateConverted = dateConverted.join("");
+
+        this.recentChatsList[item].messages[i].date = dateConverted
+
+      }
+    }
   }
 }).mount("#app")
 
