@@ -7,7 +7,7 @@ createApp({
       savedIndex: 0,
       newMessageChat: '',
       newMessage: {},
-
+      usefullSelector: '',
       recentChatsList: [{
         name: 'Michele',
         avatar: '_1',
@@ -126,8 +126,6 @@ createApp({
   methods: {
     saveIndex(i) {
       this.savedIndex = i;
-
-
     },
     addMessage() {
       let clock = new Date;

@@ -85,8 +85,9 @@
                     </div>
                     <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
                         <span>{{ recentChatsList[savedIndex].name }}</span>
-                        <small class="last-message">ultimo accesso alle ore
-                            {{recentChatsList[savedIndex].lastAccess}}
+                        <small v-if="recentChatsList[savedIndex].messages" class="last-message">ultimo accesso alle ore
+                            {{recentChatsList[savedIndex].messages[recentChatsList[savedIndex].messages.length -
+                            1].date}}
                         </small>
                     </div>
 
