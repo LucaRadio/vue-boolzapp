@@ -83,7 +83,8 @@
                     </div>
                     <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
                         <span>{{ recentChatsList[savedIndex].name }}</span>
-                        <small class="last-message">ultimo accesso alle ore 12:00
+                        <small class="last-message">ultimo accesso alle ore
+                            {{recentChatsList[savedIndex].messages[lastMessageIndex].date}}
                         </small>
                     </div>
 
@@ -95,18 +96,22 @@
                 <!-- messaggi chat selezionata-->
                 <div class="messages-chat flex-grow-1 overflow-auto p-2">
                     <div class="message-container my-message-container gap-2">
-                        <div v-for="item in recentChatsList[savedIndex].messages"
+                        <div class="fs-6" v-for="item in recentChatsList[savedIndex].messages"
                             :class="item.status === 'sent' ? 'my-message':'your-message'">
                             {{item.message}}
+                            <small class="date d-block text-end">
+                                {{(item.date).slice("")}}
+                            </small>
                         </div>
+
                     </div>
                 </div>
                 <div class="text-bar-container">
                     <div class="emote"><i class="fa-regular fa-face-smile"></i></div>
-                    <div class="text-bar flex-grow-1">
-                        <input type="text" class="form-control shadow-none rounded-1"
-                            placeholder="Scrivi un messaggio ">
-                    </div>
+                    <form class="text-bar flex-grow-1" @submit.prevent="addMessage()">
+                        <input type="text" class="form-control shadow-none rounded-1" placeholder="Scrivi un messaggio "
+                            v-model="newMessageChat">
+                    </form>
                     <div class="emote"><i class="fa-solid fa-microphone"></i></div>
                 </div>
             </div>

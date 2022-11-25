@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      lastMessageIndex: 0,
       savedIndex: 0,
       recentChatsList: [{
         name: 'Michele',
@@ -108,13 +109,38 @@ createApp({
         messages: [],
       }
       ],
+      newMessageChat: '',
+      newMessage: {
+        date: '',
+        message: '',
+        status: ''
+      }
     }
   },
   methods: {
     saveIndex(i) {
       this.savedIndex = i;
 
-    }
+    },
+    addMessage() {
+      let date = new Date;
+      let hours = date.getHours();
+      let minutes = date.getMinutes();
+      let newDate = `${hours}:${minutes}`
+
+      this.newMessage.date = newDate,
+        this.newMessage.message = this.newMessageChat,
+        this.newMessage.status = 'sent'
+      console.log(this.recentChatsList[this.savedIndex]);
+      this.recentChatsList[this.savedIndex].messages.push(
+        this.newMessage
+      )
+      // this.lastMessageIndex = this.recentChatsList[this.savedIndex].messages.length - 1;
+    },
+
+
+  },
+  mounted() {
   }
 }).mount("#app")
 
