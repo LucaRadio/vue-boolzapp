@@ -147,6 +147,7 @@ createApp({
     },
     answer() {
       this.createMessage(false)
+      this.recentChatsList[this.savedIndex].lastAccess = this.newMessage.date;
 
     },
     createMessage(sent) {
@@ -159,7 +160,6 @@ createApp({
         this.newMessage.status = 'received';
 
       }
-      this.recentChatsList[this.savedIndex].lastAccess = this.newMessage.date;
       this.recentChatsList[this.savedIndex].messages.push({
         date: this.newMessage.date,
         message: this.newMessage.message,
