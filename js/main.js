@@ -3,11 +3,10 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
-      lastMessage: '',
+      lastMessage: 'recentChatsList[savedIndex].messages[recentChatsList[savedIndex].messages.length -1]',
       savedIndex: 0,
       newMessageChat: '',
       newMessage: {},
-      usefullSelector: '',
       recentChatsList: [{
         name: 'Michele',
         avatar: '_1',
@@ -155,6 +154,7 @@ createApp({
         message: this.newMessage.message,
         status: this.newMessage.status
       })
+
 
     }
 
