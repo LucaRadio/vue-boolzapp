@@ -47,78 +47,81 @@
                 <!-- Barra di ricerca chat -->
 
                 <div class="search-bar-container p-2">
-                    <div class="input-group">
-                        <button class="btn-group btn rounded-0">
-                            <i class="fa-solid fa-magnifying-glass px-3"></i>
-                        </button>
-                        <input type="text" class="form-control form-control-sm rounded-0 shadow-none"
-                            placeholder="Cerca o inizia una nuova chat">
-                    </div>
-                </div>
-
-                <!-- Lista chat recenti -->
-                <div class="chats-container">
-                    <div :class="savedIndex === i ? 'active' :''"
-                        class="single-recent-chat-container d-flex align-items-center" v-for="item,i in recentChatsList"
-                        @click="saveIndex(i)">
-                        <div class="avatar-container">
-                            <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="item.name"
-                                class="img-fluid rounded-circle">
-                        </div>
-                        <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
-                            <span>{{item.name}}</span>
-                            <small v-if="item.messages.length" class="last-message">{{
-                                getLastMessageByIndex(i).message }}
-                            </small>
-                        </div>
-                    </div>
+                    <form @submit.prevent="filterArray()">
+                        <div class="input-group">
+                            <button class="btn-group btn rounded-0">
+                                <i class="fa-solid fa-magnifying-glass px-3"></i>
+                            </button>
+                            <input type="text" class="form-control form-control-sm rounded-0 shadow-none"
+                                placeholder="Cerca o inizia una nuova chat" v-model="tryToFilter">
+                    </form>
                 </div>
             </div>
 
-            <!-- Chat Selezionata -->
-            <div class="chat-side d-flex flex-column">
-                <!-- Navbar chat selezionata -->
-                <div class="my-nav d-flex border-start border-2 border-light">
-                    <div class="avatar-container d-flex align-items-center">
-                        <img :src="'img/avatar'+ recentChatsList[savedIndex].avatar +'.jpg'" alt="my-avatar"
-                            class="img-fluid rounded-circle">
+            <!-- Lista chat recenti -->
+            <div class=" chats-container">
+                <div :class="savedIndex === i ? 'active' :''"
+                    class="single-recent-chat-container d-flex align-items-center" v-for="item,i in filterArray()"
+                    :key="i + item.name" @click="saveIndex(i)">
+                    <div class="avatar-container">
+                        <img :src="'img/avatar'+ item.avatar +'.jpg'" :alt="item.name" class="img-fluid rounded-circle">
                     </div>
                     <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
-                        <span>{{ recentChatsList[savedIndex].name }}</span>
-                        <small v-if="recentChatsList[savedIndex].messages.length" class="last-message">ultimo accesso
-                            alle ore
-                            {{ getLastMessageByIndex(savedIndex).date }}
+                        <span>{{item.name}}</span>
+                        <small v-if="item.messages.length" class="last-message">{{
+                            getLastMessageByIndex(i).message }}
                         </small>
                     </div>
-
-                    <div class="icon-container"><i class="fa-solid fa-magnifying-glass"></i></div>
-                    <div class="icon-container"><i class="fa-solid fa-paperclip"></i></div>
-                    <div class="icon-container"><i class="fa-solid fa-ellipsis-vertical"></i></div>
-
-                </div>
-                <!-- messaggi chat selezionata-->
-                <div class="messages-chat flex-grow-1 overflow-auto p-2">
-                    <div class="message-container my-message-container gap-2">
-                        <div class="fs-6" v-for="item,i in recentChatsList[savedIndex].messages"
-                            :class="item.status === 'sent' ? 'my-message':'your-message'">
-                            {{item.message}}
-                            <small class="date d-block text-end">
-                                {{item.date}}
-                            </small>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="text-bar-container">
-                    <div class="emote"><i class="fa-regular fa-face-smile"></i></div>
-                    <form class="text-bar flex-grow-1" @submit.prevent="addMessage()">
-                        <input type="text" class="form-control shadow-none rounded-1" placeholder="Scrivi un messaggio "
-                            v-model="newMessageChat">
-                    </form>
-                    <div class="emote"><i class="fa-solid fa-microphone"></i></div>
                 </div>
             </div>
         </div>
+
+        <!-- Chat Selezionata -->
+        <div class="chat-side d-flex flex-column">
+            <!-- Navbar chat selezionata -->
+            <div class="my-nav d-flex border-start border-2 border-light">
+                <div class="avatar-container d-flex align-items-center">
+                    <img :src="'img/avatar'+ filterArray()[savedIndex].avatar +'.jpg'" alt="my-avatar"
+                        class="img-fluid rounded-circle">
+                </div>
+                <div class="message-notification-container me-auto d-flex flex-column justify-content-center">
+                    <span>{{ filterArray()[savedIndex].name }}</span>
+                    <small v-if="filterArray()[savedIndex].messages.length" class="last-message">ultimo
+                        accesso
+                        alle ore
+                        {{ getLastMessageByIndex(savedIndex).date }}
+                    </small>
+                </div>
+
+                <div class="icon-container"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <div class="icon-container"><i class="fa-solid fa-paperclip"></i></div>
+                <div class="icon-container"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+
+            </div>
+            <!-- messaggi chat selezionata-->
+            <div class="messages-chat flex-grow-1 overflow-auto p-2">
+                <div class="message-container my-message-container gap-2">
+                    <div class="fs-6" v-for="item,i in filterArray()[savedIndex].messages"
+                        :class="item.status === 'sent' ? 'my-message':'your-message'">
+                        {{item.message}}
+                        <small class="date d-block text-end">
+                            {{item.date}}
+                        </small>
+                        <div class="dropdown d-none">Ciao</div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="text-bar-container">
+                <div class="emote"><i class="fa-regular fa-face-smile"></i></div>
+                <form class="text-bar flex-grow-1" @submit.prevent="addMessage()">
+                    <input type="text" class="form-control shadow-none rounded-1" placeholder="Scrivi un messaggio "
+                        v-model="newMessageChat">
+                </form>
+                <div class="emote"><i class="fa-solid fa-microphone"></i></div>
+            </div>
+        </div>
+    </div>
     </div>
     </div>
 

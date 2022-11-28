@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      tryToFilter: null,
       savedIndex: 0,
       newMessageChat: '',
       newMessage: {},
@@ -116,10 +117,8 @@ createApp({
   },
   methods: {
     getLastMessageByIndex(conversationIndex) {
-      const conversation = this.recentChatsList[conversationIndex];
-
+      const conversation = this.filterArray()[conversationIndex];
       const message = conversation.messages[conversation.messages.length - 1];
-
       return {
         message: message.message,
         date: message.date
@@ -148,6 +147,8 @@ createApp({
       this.createMessage(false)
 
     },
+
+
     createMessage(sent) {
       this.newMessage.date = newClock;
       if (sent === true) {
@@ -158,11 +159,22 @@ createApp({
         this.newMessage.status = 'received';
 
       }
-      this.recentChatsList[this.savedIndex].messages.push({
+      this.filterArray()[this.savedIndex].messages.push({
         date: this.newMessage.date,
         message: this.newMessage.message,
         status: this.newMessage.status
       })
+    },
+
+
+    filterArray() {
+      if (this.tryToFilter) {
+        return this.recentChatsList.filter((item) => {
+          return item.name.toLowerCase().includes(this.tryToFilter.toLowerCase());
+        })
+      } else {
+        return this.recentChatsList;
+      }
     },
   },
   mounted() {
