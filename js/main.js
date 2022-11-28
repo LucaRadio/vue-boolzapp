@@ -3,6 +3,7 @@ const { createApp } = Vue;
 createApp({
   data() {
     return {
+      deleteElement: null,
       tryToFilter: null,
       savedIndex: 0,
       newMessageChat: '',
@@ -165,6 +166,10 @@ createApp({
         status: this.newMessage.status
       })
     },
+    deleteMessage(i) {
+
+      this.filterArray()[this.savedIndex].messages.splice(i, 1)
+    },
 
 
     filterArray() {
@@ -176,6 +181,7 @@ createApp({
         return this.recentChatsList;
       }
     },
+
   },
   mounted() {
     for (item in this.recentChatsList) {

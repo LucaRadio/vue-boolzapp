@@ -124,7 +124,22 @@ body {
     align-self: start;
 }
 
+.fs-6 .dropdown {
+    display: none;
+}
 
 .fs-6:hover .dropdown {
     display: block !important;
+    margin-top: -10px;
+    margin-left: 10px;
+    color: #6b7376;
+}
+
+.dropdown button {
+    color: #6b7376;
+}
+
+a:active,
+a:focus {
+    background-color: lightgray;
 }
