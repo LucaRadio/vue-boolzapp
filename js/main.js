@@ -175,7 +175,8 @@ createApp({
     filterArray() {
       if (this.tryToFilter) {
         return this.recentChatsList.filter((item) => {
-          return item.name.toLowerCase().includes(this.tryToFilter.toLowerCase());
+          const convert = item.name.toLowerCase()
+          return convert.includes(this.tryToFilter.toLowerCase());
         })
       } else {
         return this.recentChatsList;
