@@ -180,8 +180,8 @@ createApp({
       } else {
         return this.recentChatsList;
       }
-    },
 
+    },
   },
   mounted() {
     for (item in this.recentChatsList) {
