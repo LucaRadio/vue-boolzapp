@@ -118,7 +118,7 @@ createApp({
   },
   methods: {
     getLastMessageByIndex(conversationIndex) {
-      const conversation = this.filterArray()[conversationIndex];
+      const conversation = this.recentChatsList[conversationIndex];
       const message = conversation.messages[conversation.messages.length - 1];
       return {
         message: message.message,
@@ -127,6 +127,7 @@ createApp({
     },
     saveIndex(i) {
       this.savedIndex = i;
+
     },
     addMessage() {
       let clock = new Date;
@@ -160,7 +161,7 @@ createApp({
         this.newMessage.status = 'received';
 
       }
-      this.filterArray()[this.savedIndex].messages.push({
+      this.recentChatsList[this.savedIndex].messages.push({
         date: this.newMessage.date,
         message: this.newMessage.message,
         status: this.newMessage.status
@@ -168,7 +169,7 @@ createApp({
     },
     deleteMessage(i) {
 
-      this.filterArray()[this.savedIndex].messages.splice(i, 1)
+      this.recentChatsList[this.savedIndex].messages.splice(i, 1)
     },
 
 
